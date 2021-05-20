@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ModalController, NavController} from '@ionic/angular';
 import {UserInfoService} from '../../services/user-info.service';
-import {CarPopowerComponent} from '../../pages/login/components/car-popower/car-popower.component';
-import {IPageTab, PageTabType} from "../../pages/tabs/tabs.page";
 
 export interface IStatusInfo {
     name: string;
@@ -58,7 +56,6 @@ export class AvatarModalComponent implements OnInit {
     }
 
     public chooseStatus(i: number): void {
-        this.userInfo.statusIndex$.next(i);
     }
 
     public changeUser(): void {
@@ -67,18 +64,9 @@ export class AvatarModalComponent implements OnInit {
     }
 
     public changeCar(): void {
-        this.presentModal().then();
     }
 
     public selectTab(idx: number): void {
         this.userInfo.currentTab$.next(idx);
-    }
-
-    private async presentModal() {
-        const modal = await this.modalController.create({
-            component: CarPopowerComponent,
-            cssClass: 'car-modal'
-        });
-        return await modal.present();
     }
 }

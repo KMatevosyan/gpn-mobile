@@ -1,5 +1,8 @@
 <div class="container">
-  <app-header>
+  <app-header
+    [withAvatar]="false"
+    [withCalendar]="true"
+  >
     <div
       class="tab-btn"
       [class.tab-btn_active]="i === (currentTab$ | async)"
@@ -16,22 +19,10 @@
         *ngSwitchCase="0"
       >
         <app-tabs-tasks-card
-          *ngFor="let item of (newItems$ | async)"
+          *ngFor="let item of (agreeItems$ | async); let i = index"
           [data]="item"
+          [isActive]="i === 0"
         ></app-tabs-tasks-card>
-
-        <div
-          class="circle-btn"
-          (click)="openChooseOverlay()"
-        >
-          <svg-icon
-            [svgStyle]="{
-              'height': '2.6vh',
-              'width': '4vh'
-            }"
-            src="assets/Icons/tabs/tasks-tab/accept.svg"
-          ></svg-icon>
-        </div>
       </div>
 
       <div
@@ -39,24 +30,14 @@
         *ngSwitchCase="1"
       >
         <app-tabs-tasks-card
-          *ngFor="let item of (inProgressItems$ | async); let i = index"
+          *ngFor="let item of (initiatedItems$ | async); let i = index"
+          isInitiated="true"
           [data]="item"
-          [isActive]="i === 0"
         ></app-tabs-tasks-card>
-
-        <div
-          class="circle-btn"
-          (click)="openMap()"
-        >
-          <svg-icon
-            [svgStyle]="{
-              'height': '4.8vh',
-              'width': '4.8vh'
-            }"
-            src="assets/Icons/tabs/tasks-tab/geo-map.svg"
-          ></svg-icon>
-        </div>
       </div>
     </ng-container>
   </div>
+
+  <div class="shadow shadow__first"></div>
+  <div class="shadow"></div>
 </div>

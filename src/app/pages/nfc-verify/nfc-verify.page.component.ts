@@ -22,7 +22,7 @@ export class NfcVerifyPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.tabsService.inProgressItems$.subscribe(val => {
+        this.tabsService.agreeItems$.subscribe(val => {
             this.currentTask = val[0];
         });
     }

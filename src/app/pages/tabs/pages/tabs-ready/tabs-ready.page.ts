@@ -1,13 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import {IPageTab, PageTabType} from '../../tabs.page';
 import {BehaviorSubject} from 'rxjs';
-import {DELIVERED, SELECTED} from './mock';
-import {NavController} from "@ionic/angular";
+import {READY} from './mock';
+import {ModalController, NavController} from '@ionic/angular';
+import {TabsReadyModalComponent} from './components/tabs-ready-modal/tabs-ready-modal.component';
 
 
-export interface IDeliveryItems {
+export interface IReadyItem {
     num: string;
     manufacture: string;
+    date: string;
+    verificationType: string;
+    result: string;
+    properties?: IReadyItemProperty[];
+}
+
+export interface IReadyItemProperty {
+    name: string;
+    value?: number;
+    prevValue?: number; // тут будет храниться старое значение
+    error?: number;
+    prevError?: number;
 }
 
 @Component({
@@ -18,26 +31,31 @@ export interface IDeliveryItems {
 
 export class TabsReadyPage implements OnInit, IPageTab {
     public route: PageTabType = 'ready';
-    public tabs$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(['в машине', 'в елк']);
 
-    public selectedItems$: BehaviorSubject<IDeliveryItems[]> = new BehaviorSubject<IDeliveryItems[]>(SELECTED);
-    public deliveredItems$: BehaviorSubject<IDeliveryItems[]> = new BehaviorSubject<IDeliveryItems[]>(DELIVERED);
+    public readyItems$: BehaviorSubject<IReadyItem[]> = new BehaviorSubject<IReadyItem[]>(READY);
 
-    public currentTab = 0;
     constructor(
         private navCtrl: NavController,
+        private modalController: ModalController,
     ) {
     }
 
-    ngOnInit() {
-    }
-
-    public changeTab(i): void {
-        this.currentTab = i;
-    }
+    ngOnInit() {}
 
     public toNfc(): void {
         this.navCtrl.navigateRoot('/nfc').then();
     }
 
+    public async openModal(e: Event): Promise<void> {
+        this.presentModal().then();
+    }
+
+    private async presentModal() {
+        const modal = await this.modalController.create({
+            component: TabsReadyModalComponent,
+            cssClass: 'ready-tab-modal',
+            showBackdrop: false
+        });
+        return await modal.present();
+    }
 }

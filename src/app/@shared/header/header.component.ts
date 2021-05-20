@@ -11,6 +11,8 @@ import {ThemeServiceService} from '../../services/theme-service.service';
 })
 export class HeaderComponent implements OnInit {
     @Input() withThemeSwitch = false;
+    @Input() withCalendar = false;
+    @Input() withAvatar = true;
 
     constructor(
       public modalController: ModalController,

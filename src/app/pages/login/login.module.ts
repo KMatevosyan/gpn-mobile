@@ -7,7 +7,6 @@ import {IonicModule} from '@ionic/angular';
 import {LoginPage} from './login.page';
 import {RouterModule} from '@angular/router';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {CarPopowerComponent} from './components/car-popower/car-popower.component';
 
 @NgModule({
     imports: [
@@ -19,7 +18,7 @@ import {CarPopowerComponent} from './components/car-popower/car-popower.componen
         FormsModule,
         ReactiveFormsModule,
     ],
-    declarations: [LoginPage, CarPopowerComponent]
+    declarations: [LoginPage]
 })
 export class LoginPageModule {
 }

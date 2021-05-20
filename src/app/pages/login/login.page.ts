@@ -4,7 +4,6 @@ import {ModalController, NavController, PopoverController} from '@ionic/angular'
 import {KeyboardService} from '../../@core/services/keyboard.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {CarPopowerComponent} from './components/car-popower/car-popower.component';
 import {SimpleModalComponent} from '../../@shared/simple-modal/simple-modal.component';
 
 
@@ -40,19 +39,12 @@ export class LoginPage implements OnInit, OnDestroy {
 
     public async submit(e: Event): Promise<void> {
         // Временная логика
-        if(this.loginForm.get('login').value.length > 1) {
-            this.presentModalCar().then();
-        } else {
+        if(this.loginForm.get('login').value.length < 2) {
             this.presentModalPassword().then();
         }
-    }
-
-    private async presentModalCar() {
-        const modal = await this.modalController.create({
-            component: CarPopowerComponent,
-            cssClass: 'car-modal'
-        });
-        return await modal.present();
+        else {
+            this.navCtrl.navigateRoot('/tabs').then();
+        }
     }
 
     private async presentModalPassword() {

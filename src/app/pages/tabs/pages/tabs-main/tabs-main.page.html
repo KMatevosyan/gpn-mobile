@@ -1,4 +1,6 @@
-<app-header>
+<app-header
+  [withCalendar]="true"
+>
   <span class="header__title">Статистика</span>
 </app-header>
 <div class="container">
@@ -7,14 +9,15 @@
       <svg-icon
         src="assets/Icons/tabs/main-tab/mask.svg"
         [svgStyle]="{
-          'height': '40vh',
-          'width': '40vh'
+          'height': '49vh',
+          'width': '49vh'
         }"
       ></svg-icon>
       <div class="chart-info">
         <span class="chart__title">Количество заданий,</span>
         <span class="chart__unit">шт</span>
         <span class="chart__total">{{(diagramData$ | async).total}}</span>
+        <div class="chart__date">{{(diagramData$ | async).date}}</div>
       </div>
     </div>
   </div>
@@ -26,7 +29,12 @@
       (click)="redirectToTab(item.name)"
     >
       <span class="title">{{item.name}}</span>
-      <span class="value">{{item.value}}</span>
+      <span class="value">{{item?.showValue || item.value}}</span>
     </div>
+
+    <div class="add-container">+</div>
   </div>
+
+  <div class="shadow shadow__first"></div>
+  <div class="shadow"></div>
 </div>

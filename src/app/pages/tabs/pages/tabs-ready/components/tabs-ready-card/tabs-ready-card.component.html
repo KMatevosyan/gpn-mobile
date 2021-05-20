@@ -1,16 +1,12 @@
-<div
-  class="item"
-  [ngClass]="{
-    'item_initiated': isInitiated,
-    'item_active': isActive
-  }"
->
+<div class="item">
+  <div class="chart">
+    {{data.date}}
+  </div>
   <div class="description">
     <div class="description__title">
       <span class="number">{{data.num}}</span>
-      <span class="date">{{data.date}}</span>
       <svg-icon
-        src="assets/Icons/tabs/tasks-tab/canister.svg"
+        src="assets/Icons/tabs/ready-tab/edit.svg"
         [svgStyle]="{
           'width.vh': 3.9,
           'height.vh': 3.9
@@ -23,6 +19,8 @@
     <div class="description__item">
       Тип верификации: <span class="value">{{data.verificationType}}</span>
     </div>
-    <div class="description__fraction">{{data.fraction}}</div>
+    <div class="description__item">
+      Результат: <span class="value">{{data.result}}</span>
+    </div>
   </div>
 </div>

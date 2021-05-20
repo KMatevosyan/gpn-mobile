@@ -26,22 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.initializeApp();
         this.themeService.setThemeConfiguratorRoot(this.document).then();
-
-        this.subscription = this.userInfo.statusIndex$.subscribe(value => {
-            const time = 60000;
-
-            if (value !== 2) {
-                clearTimeout(this.timeOut);
-                this.timeOut = null;
-            }
-            else {
-                if (!this.timeOut) {
-                    this.timeOut = setTimeout(async () => {
-                        this.userInfo.openActivityModal().then();
-                    }, time);
-                }
-            }
-        });
     }
 
     public ngOnDestroy(): void {

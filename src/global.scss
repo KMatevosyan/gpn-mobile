@@ -57,14 +57,7 @@ html, body, .ion-app, .ion-content {
   }
 }
 
-.car-modal {
-  .modal-wrapper {
-    height: 100%;
-    width: 100%;
-  }
-}
-
-.choose-task, .activity-modal, .map-modal {
+.choose-task, .activity-modal, {
   --height: 44vh;
 
   .modal-wrapper {
@@ -76,10 +69,6 @@ html, body, .ion-app, .ion-content {
 
     overflow: hidden;
   }
-}
-
-.map-modal {
-  --height: 32vh;
 }
 
 .simple-modal {

@@ -9,7 +9,6 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 import { TabsPage } from './tabs.page';
 import {SharedModule} from '../../@shared/shared.module';
 import {AngularSvgIconModule} from 'angular-svg-icon';
-import {ChooseTaskOverlayComponent} from './pages/tabs-tasks/components/choose-task-overlay/choose-task-overlay.component';
 
 @NgModule({
     imports: [
@@ -20,6 +19,6 @@ import {ChooseTaskOverlayComponent} from './pages/tabs-tasks/components/choose-t
         SharedModule,
         AngularSvgIconModule,
     ],
-  declarations: [TabsPage, ChooseTaskOverlayComponent]
+  declarations: [TabsPage]
 })
 export class TabsPageModule {}

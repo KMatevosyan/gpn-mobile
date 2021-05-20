@@ -8,11 +8,13 @@ import {TabsInfoService} from '../../../../services/tabs/tabs-info.service';
 
 export interface IDiagram {
     total: number;
+    date: string;
     sections: IDiagramSections[];
 }
 export interface IDiagramSections {
     name: string;
     value: number;
+    showValue?: string;
     color: string;
 }
 
@@ -68,8 +70,8 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
 
     private drawSvg(data: IDiagram): void {
         const size: number = Math.min(this.chart.nativeElement.clientWidth, this.chart.nativeElement.clientHeight);
-        const innerR = 0.4 * size;
-        const outerR = 0.4 * 0.92 * size;
+        const innerR = 0.37 * size;
+        const outerR = 0.37 * 0.92 * size;
 
         if (this.svg) {
             this.svg.remove();
@@ -80,8 +82,8 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
         const arcBg = (start: number, end: number) => d3.arc()
                 .innerRadius(innerR)
                 .outerRadius(outerR)
-                .startAngle(-start * 2 * Math.PI)
-                .endAngle(-end * 2 * Math.PI);
+                .startAngle(start * 2 * Math.PI)
+                .endAngle(end * 2 * Math.PI);
 
         const arcBgBot = d3.arc()
             .innerRadius(1.04 * innerR)
@@ -93,11 +95,11 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
         const g: any = this.svg.append('g').style('transform', `translate(${size/2}px, ${size/2}px)`);
 
         g.append('path').attr('d', arcBgBot)
-            .style('fill', 'var(--gray-G11-color)');
+            .style('fill', 'var(--bg-dashboard-color)');
 
         let startPos = 0;
         let endPos = 0;
-        data.sections.forEach((section, i) => {
+        data.sections.reverse().forEach((section, i) => {
             if (i > 0) {
                 startPos += data.sections[i-1]?.value / data.total;
             }

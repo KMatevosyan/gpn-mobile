@@ -8,6 +8,8 @@ import {TabsReadyPage} from './tabs-ready.page';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '../../../../@shared/shared.module';
 import {AngularSvgIconModule} from 'angular-svg-icon';
+import {TabsReadyCardComponent} from './components/tabs-ready-card/tabs-ready-card.component';
+import {TabsReadyModalComponent} from './components/tabs-ready-modal/tabs-ready-modal.component';
 
 @NgModule({
     imports: [
@@ -18,7 +20,7 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
         SharedModule,
         AngularSvgIconModule,
     ],
-    declarations: [TabsReadyPage]
+    declarations: [TabsReadyPage, TabsReadyCardComponent, TabsReadyModalComponent]
 })
 export class TabsReadyPageModule {
 }

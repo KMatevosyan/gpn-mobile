@@ -20,6 +20,8 @@
   align-items: center;
   flex: 1;
 
+  position: relative;
+
   .chart-container {
     height: 58vh;
     width: 100%;
@@ -29,8 +31,8 @@
     justify-content: center;
 
     .chart {
-      height: 40vh;
-      width: 40vh;
+      height: 49vh;
+      width: 49vh;
 
       display: flex;
       align-items: center;
@@ -50,14 +52,10 @@
 
         position: absolute;
 
-        .chart__title, .chart__unit {
+        .chart__title, .chart__unit, .chart__date {
           font-weight: 500;
           font-size: sizeHeight(30);
           text-align: center;
-          color: var(--text-contrast-color);
-        }
-
-        .chart__unit {
           color: var(--text-main-color);
         }
 
@@ -72,12 +70,15 @@
 
   .description {
     width: 100%;
+    padding: 0 sizeWidth(60);
+
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    gap: sizeWidth(50);
 
     &-item {
       height: sizeHeight(170);
-      width: 30%;
+      width: sizeWidth(200);
 
       display: flex;
       flex-direction: column;
@@ -100,6 +101,39 @@
         font-size: sizeHeight(64);
         color: var(--text-accent-color);
       }
+    }
+
+    .add-container {
+      height: sizeHeight(90);
+      width: sizeHeight(90);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 50%;
+      background: var(--border-blue-color);
+      filter: drop-shadow(0px 0px sizeHeight(20) var(--gradient-main-color-1));
+
+      font-size: sizeHeight(64);
+      line-height: sizeHeight(77);
+      text-align: center;
+      color: var(--text-alwaysWhite-color);
+    }
+  }
+
+  .shadow {
+    height: sizeHeight(20);
+    width: 100%;
+
+    background: linear-gradient(0deg, var(--gradient-main-color-1) -0.04%, var(--gradient-main-color-2) 99.96%);
+    position: absolute;
+    bottom: 0;
+
+    &__first {
+      top: 0vh;
+      background: linear-gradient(180deg, var(--gradient-main-color-1) -0.04%, var(--gradient-main-color-2) 99.96%);
     }
   }
 }

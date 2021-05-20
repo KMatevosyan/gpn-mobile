@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ModalController} from '@ionic/angular';
 
 @Component({
-  selector: 'app-map-modal',
-  templateUrl: './map-modal.component.html',
-  styleUrls: ['./map-modal.component.scss'],
+  selector: 'app-tabs-ready-modal',
+  templateUrl: './tabs-ready-modal.component.html',
+  styleUrls: ['./tabs-ready-modal.component.scss'],
 })
-export class MapModalComponent implements OnInit {
+export class TabsReadyModalComponent implements OnInit {
     constructor(
         public modalController: ModalController
     ) { }

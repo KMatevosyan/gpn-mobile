@@ -1,67 +1,49 @@
 import {ITasksItem} from './tabs-tasks.page';
 
-export const TASKS_IN_PROGRESS: ITasksItem[] = [
+export const TASKS_AGREE: ITasksItem[] = [
+    {
+        num: '№115621',
+        manufacture: 'АТ-9',
+        date: '19.01.2021',
+        verificationType: 'Рабочая проба',
+        fraction: 'Фр. бензин 70-100℃',
+    },
+    {
+        num: '№115622',
+        manufacture: 'АТ-8',
+        date: '19.01.2021',
+        verificationType: 'Эталонная проба',
+        fraction: 'Фр. бензин 70-100℃',
+    },
     {
         num: '№115623',
-        manufacture: 'АТ-9',
-        tare: 4,
-        test: 6
-    },
-    {
-        num: '№115625',
-        manufacture: 'АТ-8',
-        tare: 11,
-        test: 11
-    },
-    {
-        num: '№115626',
         manufacture: 'АТ-7',
-        tare: 8,
-        test: 8
+        date: '19.01.2021',
+        verificationType: 'Портативный анализатор',
+        fraction: 'Фр. бензин 70-100℃',
     },
     {
-        num: '№115627',
-        manufacture: 'ГФУ-2',
-        tare: 10,
-        test: 10
+        num: '№115624',
+        manufacture: 'АТ-9',
+        date: '19.01.2021',
+        verificationType: 'Рабочая проба',
+        fraction: 'Фр. бензин 70-100℃',
     }
 ];
 
-export const NEW_TASKS: ITasksItem[] = [
-    {
-        num: '№115623',
-        manufacture: 'АТ-9',
-        tare: 4,
-        test: 6
-    },
+export const INITIATED_TASKS: ITasksItem[] = [
     {
         num: '№115625',
-        manufacture: 'АТ-8',
-        tare: 11,
-        test: 11
+        manufacture: 'ГФУ-2',
+        date: '19.01.2021',
+        verificationType: 'Рабочая проба',
+        fraction: 'Фр. бензин 70-100℃',
     },
     {
         num: '№115626',
-        manufacture: 'АТ-7',
-        tare: 8,
-        test: 8
-    },
-    {
-        num: '№115627',
-        manufacture: 'ГФУ-2',
-        tare: 10,
-        test: 10
-    },
-    {
-        num: '№115628',
-        manufacture: 'АТ-6',
-        tare: 4 ,
-        test: 7
-    },
-    {
-        num: '№115629',
-        manufacture: 'АТ-5',
-        tare: 11,
-        test: 16
+        manufacture: 'АТ-10',
+        date: '19.01.2021',
+        verificationType: 'Рабочая проба',
+        fraction: 'Фр. бензин 70-100℃',
     }
 ];
