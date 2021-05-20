@@ -31,7 +31,7 @@
       >
         <app-tabs-tasks-card
           *ngFor="let item of (initiatedItems$ | async); let i = index"
-          isInitiated="true"
+          [isInitiated]="true"
           [data]="item"
         ></app-tabs-tasks-card>
       </div>
