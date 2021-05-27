@@ -31,12 +31,13 @@ export class VerificationTypeComponent implements OnInit {
     }
 
     public dismiss(): void {
-        this.modalController.dismiss().then();
+        this.modalController.dismiss().then(item => {
+            this.tabsService.closeVerification$.next(true);
+        });
     }
 
     public accept() {
         this.navCtrl.navigateRoot('/tabs/tabs-tasks').then();
-        this.tabsService.closeVerification$.next(true);
         this.tabsService.tasksCurrentTab$.next(1);
         this.dismiss();
     }

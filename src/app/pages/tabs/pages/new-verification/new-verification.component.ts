@@ -112,9 +112,7 @@ export class NewVerificationComponent implements OnInit {
     ngOnInit() {
         this.tabsService.closeVerification$.subscribe(value =>  {
             if(value) {
-                setTimeout(()=>{
-                    this.modalController.dismiss().then();
-                }, 500);
+                this.modalController.dismiss().then();
             }
         });
     }
