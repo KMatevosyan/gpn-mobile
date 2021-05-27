@@ -1,3 +1,42 @@
-<p>
-  tabs-ready-modal works!
-</p>
+<div class="container">
+  <div class="slider"></div>
+  <div class="content">
+    <div class="description">
+      <div class="description__title">
+        <span class="number">{{data?.num}}</span>
+      </div>
+      <div class="description__item">
+        Установка: <span class="value">{{data?.manufacture}}</span>
+      </div>
+      <div class="description__item">
+        Тип верификации: <span class="value">{{data?.verificationType}}</span>
+      </div>
+      <div class="description__title">
+        Результат
+      </div>
+    </div>
+
+    <div class="date" *ngFor="let prop of data?.properties">
+      <div class="property property__main">
+        <div class="title">{{prop.name}}</div>
+        <div class="input-content">
+          <input [value]="prop?.value" class="value">
+        </div>
+      </div>
+      <div class="property property__error">
+        <div class="title">Погрешность</div>
+        <div class="input-content">
+          <input [value]="prop?.error || ''" class="value">
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button
+        (click)="dismiss()"
+        class="btn btn-next"
+        [disabled]="false"
+      >Сформировать задание</button>
+    </div>
+  </div>
+</div>

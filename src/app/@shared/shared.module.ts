@@ -6,6 +6,7 @@ import {AvatarModalComponent} from './avatar-modal/avatar-modal.component';
 import {StepProgressBarComponent} from './step-progress-bar/step-progress-bar.component';
 import {IonicModule} from '@ionic/angular';
 import {SimpleModalComponent} from './simple-modal/simple-modal.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 @NgModule({
     declarations: [
@@ -13,11 +14,13 @@ import {SimpleModalComponent} from './simple-modal/simple-modal.component';
         AvatarModalComponent,
         StepProgressBarComponent,
         SimpleModalComponent,
+        CalendarComponent
     ],
     exports: [
         HeaderComponent,
         StepProgressBarComponent,
         SimpleModalComponent,
+        CalendarComponent
     ],
     imports: [
         CommonModule,

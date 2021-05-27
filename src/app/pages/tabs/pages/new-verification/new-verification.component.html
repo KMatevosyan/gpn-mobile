@@ -1,0 +1,153 @@
+<div class="container">
+  <app-header
+    class = header
+    [withThemeSwitch]="false"
+    [withAvatar]="false"
+  >
+    <div class="arrow" (click)="dismiss()">
+      <svg-icon
+        src="/assets/Icons/tabs/arrowLeft.svg"
+        [svgStyle]="{
+          'height.vh': 3.9,
+          'width.vh': 3.9
+        }"
+      ></svg-icon>
+    </div>
+    <div class="title">Новая верификация</div>
+  </app-header>
+
+  <div class="content">
+    <div
+      class="select-container"
+      [class.select-container_active]="dropdownActive?.manufacture"
+    >
+      <div class="select-title">Производство</div>
+      <div
+        class="dropdown"
+        [ngStyle]="{
+          'z-index': 9003
+        }"
+        [class.dropdown_expanded]="dropdownExpand.manufacture"
+        (click)="toggleDropdown('manufacture')"
+      >
+        <div class="current">
+          {{currentValues?.manufacture || 'Выберите производство'}}
+          <svg-icon
+            src="/assets/Icons/tabs/arrowDown.svg"
+            [svgStyle]="{
+              'height.vh': 3.9,
+              'width.vh': 3.9
+            }"
+          ></svg-icon>
+        </div>
+        <div class="dropdown-list">
+          <div
+            class="dropdown__item"
+            *ngFor="let manufacture of (manufactureList$ | async); let i = index"
+            (click)="chooseItem(i, 'manufacture')"
+          >{{manufacture}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="select-container"
+      [class.select-container_active]="dropdownActive?.machine"
+    >
+      <div class="select-title">Установка</div>
+      <div
+        class="dropdown"
+        [ngStyle]="{
+          'z-index': 9002
+        }"
+        [class.dropdown_expanded]="dropdownExpand.machine"
+        (click)="toggleDropdown('machine')"
+      >
+        <div class="current">
+          {{currentValues?.machine || 'Выберите установку'}}
+          <svg-icon
+            src="/assets/Icons/tabs/arrowDown.svg"
+            [svgStyle]="{
+              'height.vh': 3.9,
+              'width.vh': 3.9
+            }"
+          ></svg-icon>
+        </div>
+        <div class="dropdown-list">
+          <div
+            class="dropdown__item"
+            *ngFor="let machine of (machineList$ | async); let i = index"
+            (click)="chooseItem(i, 'machine')"
+          >{{machine}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="select-container"
+      [class.select-container_active]="dropdownActive?.pak"
+    >
+      <div class="select-title">ПАК</div>
+      <div
+        class="dropdown"
+        [ngStyle]="{
+          'z-index': 9001
+        }"
+        [class.dropdown_expanded]="dropdownExpand.pak"
+        (click)="toggleDropdown('pak')"
+      >
+        <div class="current">
+          {{currentValues?.pak || 'Выберите ПАК'}}
+          <svg-icon
+            src="/assets/Icons/tabs/arrowDown.svg"
+            [svgStyle]="{
+              'height.vh': 3.9,
+              'width.vh': 3.9
+            }"
+          ></svg-icon>
+        </div>
+        <div class="dropdown-list">
+          <div
+            class="dropdown__item"
+            *ngFor="let pak of (pakList$ | async); let i = index"
+            (click)="chooseItem(i, 'pak')"
+          >{{pak}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="select-container"
+      [class.select-container_active]="dropdownActive?.quality"
+    >
+      <div class="select-title">Показатель качества</div>
+
+      <div
+        class="checkbox-container"
+        [ngStyle]="{
+          'z-index': 9000
+        }"
+      >
+        <div class="checkbox-item" *ngFor="let quality of (qualityList$ | async)">
+          <div class="checkbox">
+            <ion-checkbox color="primary"></ion-checkbox>
+          </div>
+          <div class="checkbox-item__name">{{quality}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button
+        (click)="openVerificationType()"
+        class="btn btn-next"
+        [disabled]="!this.dropdownActive.quality"
+      >Далее</button>
+
+      <button
+        (click)="dismiss()"
+        class="btn btn-cancel"
+      >Отменить</button>
+    </div>
+  </div>
+</div>

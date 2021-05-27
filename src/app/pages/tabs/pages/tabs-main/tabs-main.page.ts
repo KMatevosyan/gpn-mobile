@@ -3,8 +3,9 @@ import {IPageTab, PageTabType} from '../../tabs.page';
 import {BehaviorSubject} from 'rxjs';
 import {MAIN_PAGE_DATA} from './mock';
 import * as d3 from 'd3';
-import {NavController} from '@ionic/angular';
+import {ModalController, NavController} from '@ionic/angular';
 import {TabsInfoService} from '../../../../services/tabs/tabs-info.service';
+import {NewVerificationComponent} from "../new-verification/new-verification.component";
 
 export interface IDiagram {
     total: number;
@@ -32,7 +33,8 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
 
     constructor(
         private navCtrl: NavController,
-        private tabsService: TabsInfoService
+        private tabsService: TabsInfoService,
+        private modalController: ModalController
     ) {}
 
     @HostListener('window:resize', ['$event'])
@@ -48,6 +50,19 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
 
     ngAfterViewInit() {
         this.drawSvg(this.diagramData$.value);
+    }
+
+    public addVerification(): void {
+        this.presentModal().then();
+    }
+
+    private async presentModal() {
+        const modal = await this.modalController.create({
+            component: NewVerificationComponent,
+            cssClass: 'verification-modal',
+            showBackdrop: false
+        });
+        return await modal.present();
     }
 
     public redirectToTab(tabName: string): void {

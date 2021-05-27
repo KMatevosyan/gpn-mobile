@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="content">
+    <div class="title">Выберите дату</div>
+
+    <div class="calendar">
+      <div class="slider">
+        <svg-icon
+          class="arrow arrow-left"
+          src="/assets/Icons/tabs/arrowLeft.svg"
+          [svgStyle]="{
+            'height.vh': 2.5,
+            'width.vh': 2.5
+          }"
+          (click)="prev()"
+        ></svg-icon>
+
+        <span>{{months[date.getMonth()]}}</span>
+
+        <svg-icon
+          class="arrow arrow-right"
+          src="/assets/Icons/tabs/arrowLeft.svg"
+          [svgStyle]="{
+            'height.vh': 2.5,
+            'width.vh': 2.5
+          }"
+          (click)="next()"
+        ></svg-icon>
+      </div>
+      <div class="weekdays">
+        <div
+          class="weekdays__item"
+          *ngFor="let weekday of weekdayList"
+        >{{weekday}}</div>
+      </div>
+
+      <div class="days">
+        <div
+          class="days__item days__item_prev"
+          *ngFor="let item of prevDates"
+          [ngClass]="{
+            days__item_critical: item.isCritical,
+            days__item_active: item.isActive
+          }"
+          (click)="choseDate('prev', item.date)"
+        >
+          {{item.date}}
+          <svg-icon
+            *ngIf="item.haveIndicator"
+            src="assets/Icons/calendar/calendar-indicator.svg"
+            [svgStyle]="{
+              'height.vh': 1,
+              'width.vh': 1
+            }"
+          ></svg-icon>
+        </div>
+
+        <div
+          class="days__item"
+          *ngFor="let item of currentDates"
+          [ngClass]="{
+            days__item_critical: item.isCritical,
+            days__item_active: item.isActive
+          }"
+          (click)="choseDate('current', item.date)"
+        >
+          {{item.date}}
+          <svg-icon
+            *ngIf="item.haveIndicator"
+            src="assets/Icons/calendar/calendar-indicator.svg"
+            [svgStyle]="{
+              'height.vh': 1,
+              'width.vh': 1
+            }"
+          ></svg-icon>
+        </div>
+
+        <div
+          class="days__item days__item_next"
+          *ngFor="let item of nextDates"
+          [ngClass]="{
+            days__item_critical: item.isCritical,
+            days__item_active: item.isActive
+          }"
+
+          (click)="choseDate('next', item.date)"
+        >
+          {{item.date}}
+          <svg-icon
+            *ngIf="item.haveIndicator"
+            src="assets/Icons/calendar/calendar-indicator.svg"
+            [svgStyle]="{
+              'height.vh': 1,
+              'width.vh': 1
+            }"
+          ></svg-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button
+        (click)="dismiss()"
+        class="btn btn-next"
+        [disabled]="false"
+      >Показать</button>
+    </div>
+  </div>
+</div>

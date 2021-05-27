@@ -9,6 +9,8 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 import { TabsPage } from './tabs.page';
 import {SharedModule} from '../../@shared/shared.module';
 import {AngularSvgIconModule} from 'angular-svg-icon';
+import {NewVerificationComponent} from './pages/new-verification/new-verification.component';
+import {VerificationTypeComponent} from './components/verification-type/verification-type.component';
 
 @NgModule({
     imports: [
@@ -19,6 +21,6 @@ import {AngularSvgIconModule} from 'angular-svg-icon';
         SharedModule,
         AngularSvgIconModule,
     ],
-  declarations: [TabsPage]
+  declarations: [TabsPage, NewVerificationComponent, VerificationTypeComponent]
 })
 export class TabsPageModule {}

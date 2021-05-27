@@ -84,11 +84,57 @@ html, body, .ion-app, .ion-content {
   }
 }
 
-.avatar-modal {
+.verification-type-modal {
+  --height: 47vh;
+
+  .modal-wrapper {
+    width: sizeWidth(640);
+    margin-top: -16vh;
+
+    border-radius: sizeHeight(8);
+    background: transparent;
+    filter: drop-shadow(0px 0px sizeHeight(20) var(--gradient-main-color-1));
+    overflow: hidden;
+  }
+}
+
+.ready-modal {
+  --height: 100vh;
+
+  .modal-wrapper {
+    height: 60vh;
+    width: 100%;
+    margin-top: 40vh;
+
+    background: transparent;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 20px 0px 0px;
+
+    overflow: hidden;
+  }
+}
+
+.avatar-modal, .verification-modal {
   --height: 100vh;
 
   .modal-wrapper {
     width: 100%;
+
+    overflow: hidden;
+  }
+}
+
+.calendar-modal{
+  --height: 100vh;
+  width: 100%;
+
+  .modal-wrapper {
+    height: sizeHeight(840);
+    width: sizeWidth(586);
+
+    border-radius: sizeHeight(8);
+    background: transparent;
+    filter: drop-shadow(0px 0px sizeHeight(20) var(--gradient-main-color-1));
 
     overflow: hidden;
   }

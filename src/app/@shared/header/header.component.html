@@ -1,8 +1,9 @@
 <div class="container">
   <ng-content></ng-content>
   <div class="btns">
-    <div *ngIf="withCalendar"  class="calendar">
+    <div *ngIf="withCalendar" class="calendar">
       <svg-icon
+        (click)="openCalendar()"
         src="assets/Icons/header/calendar.svg"
         [svgStyle]="{
         'width.vh': '3.2',

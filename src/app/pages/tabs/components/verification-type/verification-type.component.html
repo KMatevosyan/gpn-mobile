@@ -1,0 +1,59 @@
+<div class="container">
+  <div
+    class="select-container"
+  >
+    <div class="select-title" >Тип верификации</div>
+    <div
+      class="dropdown"
+      [class.dropdown_expanded]="dropdownExpand"
+      (click)="toggleDropdown()"
+    >
+      <div class="current">
+        {{currentValue|| 'Выберите верификацию'}}
+        <svg-icon
+          src="/assets/Icons/tabs/arrowDown.svg"
+          [svgStyle]="{
+              'height.vh': 3.9,
+              'width.vh': 3.9
+            }"
+        ></svg-icon>
+      </div>
+      <div class="dropdown-list">
+        <div
+          class="dropdown__item"
+          *ngFor="let type of (typeList$ | async); let i = index"
+          (click)="chooseItem(i)"
+        >{{type}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="date">
+    <div class="day">
+      <div class="title">Плановая дата</div>
+      <div class="input-content">
+        <svg-icon
+          src="assets/Icons/header/calendar.svg"
+        ></svg-icon>
+        <input value='19.01.2021' class="value">
+      </div>
+    </div>
+    <div class="day">
+      <div class="title">Плановое время</div>
+      <div class="input-content">
+        <svg-icon
+          src="assets/Icons/header/timer.svg"
+        ></svg-icon>
+        <input value='12:30:00' class="value">
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <button
+      (click)="accept()"
+      class="btn btn-next"
+      [disabled]="false"
+    >Сформировать задание</button>
+  </div>
+</div>
