@@ -100,7 +100,7 @@ svg-icon {
           border: sizeHeight(1) solid transparent;
 
           font-size: sizeHeight(29);
-          color: var(--text-contrast-color-color);
+          color: var(--text-contrast-color);
 
           position: relative;
 
@@ -121,12 +121,12 @@ svg-icon {
           }
 
           svg-icon {
-            height: 1vh;
-            width: 1vh;
+            height: 1.9vw;
+            width: 1.9vw;
 
             position: absolute;
-            top: sizeHeight(10);
-            right: sizeHeight(4);
+            top: sizeWidth(9);
+            right: sizeWidth(3);
           }
         }
       }
