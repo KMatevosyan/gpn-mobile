@@ -30,16 +30,16 @@ export class VerificationTypeComponent implements OnInit {
         this.currentValue = list[idx];
     }
 
-    public dismiss(): void {
-        this.modalController.dismiss().then(item => {
-            this.tabsService.closeVerification$.next(true);
-        });
+    public async dismiss(): Promise<boolean> {
+        const res = await this.modalController.dismiss();
+        return res;
     }
 
-    public accept() {
+    public async accept() {
         this.navCtrl.navigateRoot('/tabs/tabs-tasks').then();
         this.tabsService.tasksCurrentTab$.next(1);
-        this.dismiss();
+        await this.dismiss();
+        this.tabsService.closeVerification$.next(true);
     }
 
     ngOnInit() {}
