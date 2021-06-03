@@ -1,0 +1,23 @@
+<div class="container">
+  <app-header>
+    <div class="arrow" (click)="back()">
+      <svg-icon
+        src="/assets/Icons/tabs/arrowLeft.svg"
+        [svgStyle]="{
+          'height.vh': 3.9,
+          'width.vh': 3.9
+        }"
+      ></svg-icon>
+    </div>
+    <div class="title">№ 115621</div>
+  </app-header>
+
+  <div class="content">
+
+    <div class="video-container">
+      <span>Наведите камеру на штрих-код</span>
+    </div>
+
+    <button class="btn" (click)="scanner()">Загрузить изображение</button>
+  </div>
+</div>

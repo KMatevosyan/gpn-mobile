@@ -22,6 +22,7 @@
           *ngFor="let item of (agreeItems$ | async); let i = index"
           [data]="item"
           [isActive]="i === 0"
+          (click)="openNfc()"
         ></app-tabs-tasks-card>
       </div>
 

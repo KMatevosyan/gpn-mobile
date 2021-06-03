@@ -52,10 +52,7 @@ export class TabsTasksPage implements OnInit, IPageTab {
         this.currentTab$.next(i);
     }
 
-    public async openChooseOverlay(): Promise<void> {
-    }
-
-    public openMap(): void {
-        this.navCtrl.navigateRoot('/map').then();
+    public openNfc(): void {
+        this.navCtrl.navigateRoot('/nfc').then();
     }
 }

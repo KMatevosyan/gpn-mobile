@@ -1,0 +1,59 @@
+<div class="container">
+  <app-header>
+    <div class="arrow" (click)="back()">
+      <svg-icon
+        src="/assets/Icons/tabs/arrowLeft.svg"
+        [svgStyle]="{
+          'height.vh': 3.9,
+          'width.vh': 3.9
+        }"
+      ></svg-icon>
+    </div>
+    <div class="title">{{(currentTask$ | async)?.num}}</div>
+  </app-header>
+
+  <div class="content">
+    <app-step-progress-bar [stepsCount]="4" [activeStepIndex]="1"></app-step-progress-bar>
+
+    <div class="task=info-block">
+      <div class="canister-container">
+        <div class="info">
+          <div class="content-text-block">
+            <span class="gray-text">Установка: <span class="light-text">{{(currentTask$ | async)?.manufacture}}</span></span>
+          </div>
+          <div class="content-text-block">
+            <span class="gray-text">Тип верификации: <span class="light-text">{{(currentTask$ | async)?.verificationType}}</span></span>
+          </div>
+        </div>
+        <svg-icon
+          class="canister"
+          src="assets/Icons/tabs/tasks-tab/canister.svg"
+          [svgStyle]="{
+            'width.vh': 6.2,
+            'height.vh': 6.2
+          }"
+        ></svg-icon>
+      </div>
+
+      <div class="content-text-block">
+        <span class="light-text">
+          Отсканируйте NFC метку для подтверждения отбора
+        </span>
+      </div>
+
+      <div class="barcode-icon-block">
+        <svg-icon
+          src="assets/Icons/barcode/barcode.svg"
+          [svgStyle]="{
+              'width': '100%',
+              'height': '28vh'
+            }"
+        ></svg-icon>
+      </div>
+    </div>
+
+    <button class="btn btn_activateBarcode" (click)="enableBarcode()">Сканировать</button>
+    <button class="btn" disabled>Завершить задание</button>
+  </div>
+</div>
+

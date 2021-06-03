@@ -15,6 +15,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/nfc-verify/nfc-verify.module').then(m => m.NfcVerifyModule)
     },
     {
+        path: 'barcode',
+        loadChildren: () => import('./pages/barcode-scanner/barcode-scanner.module').then(m => m.MyBarcodeScannerModule)
+    },
+    {
         path: 'tabs',
         loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
     },
