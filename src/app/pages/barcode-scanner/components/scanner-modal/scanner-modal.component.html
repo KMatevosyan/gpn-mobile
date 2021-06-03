@@ -1,6 +1,6 @@
 <div class="container">
   <app-header>
-    <div class="arrow" (click)="back()">
+    <div class="arrow" (click)="dismiss()">
       <svg-icon
         src="/assets/Icons/tabs/arrowLeft.svg"
         [svgStyle]="{
@@ -16,6 +16,9 @@
 
     <div class="video-container">
       <span>Наведите камеру на штрих-код</span>
+      <div class="video">
+        {{barcodeData?.text}}
+      </div>
     </div>
 
     <button class="btn" (click)="scanner()">Загрузить изображение</button>

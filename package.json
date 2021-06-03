@@ -21,7 +21,6 @@
     "@angular/router": "~11.2.0",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
-    "@dutchconcepts/capacitor-barcode-scanner": "^1.1.2",
     "@ionic-native/barcode-scanner": "^5.33.1",
     "@ionic-native/nfc": "^5.33.0",
     "@ionic/angular": "^5.5.2",

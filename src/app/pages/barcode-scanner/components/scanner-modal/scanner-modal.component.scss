@@ -42,6 +42,7 @@ button {
     align-items: center;
 
     position: relative;
+    z-index: 0;
 
     .video-container {
       margin-top: -5vh;
@@ -56,6 +57,13 @@ button {
       .video {
         height: sizeHeight(420);
         width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--text-contrast-color);
+        font-size: sizeHeight(34);
       }
 
       span {
