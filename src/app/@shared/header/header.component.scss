@@ -22,7 +22,6 @@
 
     display: flex;
     align-items: center;
-    gap: sizeWidth(40);
 
     .calendar {
       svg-icon {
@@ -128,6 +127,14 @@
     }
     .switch-on::after {
       left: sizeHeight(48);
+    }
+
+    .btn {
+      margin-right: sizeWidth(40);
+    }
+
+    :last-child {
+      margin-right: 0px;
     }
   }
 }

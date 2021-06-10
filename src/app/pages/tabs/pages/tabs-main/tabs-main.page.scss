@@ -74,17 +74,16 @@
 
     display: flex;
     align-items: center;
-    gap: sizeWidth(50);
 
     &-item {
       height: sizeHeight(170);
       width: sizeWidth(200);
+      margin-right: sizeWidth(50);
 
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: sizeHeight(10);
 
       background: var(--bg-header-color);
       border-left: sizeWidth(8) solid var(--index-fact-color);
@@ -98,6 +97,7 @@
       }
 
       .value {
+        margin-top: sizeHeight(10);
         font-size: sizeHeight(64);
         color: var(--text-accent-color);
       }

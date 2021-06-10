@@ -6,6 +6,7 @@
 .item {
   width: sizeWidth(660);
   padding: sizeHeight(30) sizeWidth(24);
+  margin-bottom: sizeHeight(20);
 
   display: flex;
   align-items: center;
@@ -38,13 +39,10 @@
 
     display: flex;
     flex-direction: column;
-    gap: sizeHeight(16);
-
     overflow: hidden;
 
     &__title {
       display: flex;
-      gap: sizeWidth(40);
       margin-bottom: - sizeHeight(10);
 
       font-size: sizeHeight(34);
@@ -60,6 +58,7 @@
     &__item {
       display: flex;
       flex-wrap: wrap;
+      margin-top: sizeHeight(16);
 
       white-space: nowrap;
       font-size: sizeHeight(30);

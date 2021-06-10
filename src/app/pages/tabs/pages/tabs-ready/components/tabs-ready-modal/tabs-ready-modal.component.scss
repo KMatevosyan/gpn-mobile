@@ -44,12 +44,9 @@ svg-icon {
 
       display: flex;
       flex-direction: column;
-      gap: sizeHeight(16);
 
       &__title {
         display: flex;
-        gap: sizeWidth(40);
-        margin-bottom: - sizeHeight(10);
 
         font-size: sizeHeight(34);
         color: var(--text-accent-color);
@@ -76,6 +73,10 @@ svg-icon {
           margin-left: sizeWidth(12);
           color: var(--text-subscript-color);
         }
+      }
+
+      & > :nth-child(n+2) {
+        margin-top: sizeHeight(16);
       }
     }
 

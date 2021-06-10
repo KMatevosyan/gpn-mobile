@@ -86,11 +86,11 @@ svg-icon {
       .days {
         display: flex;
         flex-wrap: wrap;
-        row-gap: sizeHeight(16);
-        column-gap: ( sizeWidth(494) - 7 * sizeWidth(54) ) / 6;
         &__item {
           height: sizeWidth(54);
           width: sizeWidth(54);
+          margin-top: sizeHeight(16);
+          margin-right: ( sizeWidth(494) - 7 * sizeWidth(54) ) / 6;
 
           display: flex;
           align-items: center;
@@ -128,6 +128,10 @@ svg-icon {
             top: sizeWidth(9);
             right: sizeWidth(3);
           }
+        }
+
+        :nth-child(7n) {
+          margin-right: 0px;
         }
       }
     }
