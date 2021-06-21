@@ -13,7 +13,7 @@
   </app-header>
 
   <div class="content">
-    <app-step-progress-bar [stepsCount]="4" [activeStepIndex]="0"></app-step-progress-bar>
+    <app-step-progress-bar [stepsCount]="4" [activeStepIndex]="2"></app-step-progress-bar>
 
     <div class="task=info-block">
       <div class="canister-container">
@@ -35,24 +35,16 @@
         ></svg-icon>
       </div>
 
-      <div class="content-text-block">
+      <div class="content-text-block time-info">
         <span class="light-text">
-          Отсканируйте NFC метку для подтверждения отбора
+          Время с начала отбора пробы:
         </span>
       </div>
 
-      <div class="nfc-icon-block">
-        <svg-icon
-          src="assets/Icons/nfc/nfc_icon.svg"
-          [svgStyle]="{
-              'width': '34vh',
-              'height': '34vh'
-            }"
-        ></svg-icon>
-      </div>
+      <div class="timer-block">{{timer.hour + ':' + timer.min + ':' + timer.sec}}</div>
     </div>
 
-    <button class="btn btn_activateNFC" (click)="enableNfc()">Отсканировать метку</button>
+    <button class="btn btn_active" (click)="accept()">Закончить отбор</button>
     <button class="btn" (click)="cancel()">Отменить задание</button>
   </div>
 </div>

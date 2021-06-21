@@ -5,6 +5,8 @@ import {KeyboardService} from '../../@core/services/keyboard.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {SimpleModalComponent} from '../../@shared/simple-modal/simple-modal.component';
+import {AuthorizationService} from '../../services/autoriztion.service';
+import {TasksService} from "../../services/tasks.service";
 
 
 @Component({
@@ -16,7 +18,7 @@ export class LoginPage implements OnInit, OnDestroy {
     @ViewChild('content') private content: ElementRef;
     public loginForm: FormGroup = new FormGroup({
         login: new FormControl('', Validators.required),
-        pass: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
     });
     private subscriber$: Subject<null> = new Subject<null>();
 
@@ -24,6 +26,8 @@ export class LoginPage implements OnInit, OnDestroy {
         public modalController: ModalController,
         private navCtrl: NavController,
         private keyboardService: KeyboardService,
+        private auth: AuthorizationService,
+        private tasks: TasksService
     ) {}
 
     ngOnInit(): void {
@@ -38,12 +42,16 @@ export class LoginPage implements OnInit, OnDestroy {
     }
 
     public async submit(e: Event): Promise<void> {
-        // Временная логика
-        if(this.loginForm.get('login').value.length < 2) {
-            this.presentModalPassword().then();
-        }
-        else {
-            this.navCtrl.navigateRoot('/tabs').then();
+        if (this.loginForm.valid) {
+            const res = await this.auth.getToken(this.loginForm.value);
+            if (res) {
+                const date = new Date();
+                await this.tasks.getTasks(date);
+                this.navCtrl.navigateRoot('/tabs').then();
+            }
+            else {
+                this.presentModalPassword().then();
+            }
         }
     }
 

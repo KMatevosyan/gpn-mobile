@@ -19,10 +19,9 @@
         *ngSwitchCase="0"
       >
         <app-tabs-tasks-card
-          *ngFor="let item of (agreeItems$ | async); let i = index"
+          *ngFor="let item of (tasksService.agreeItems$ | async); let i = index"
           [data]="item"
           [isActive]="i === 0"
-          (click)="openNfc()"
         ></app-tabs-tasks-card>
       </div>
 
@@ -31,9 +30,10 @@
         *ngSwitchCase="1"
       >
         <app-tabs-tasks-card
-          *ngFor="let item of (initiatedItems$ | async); let i = index"
+          *ngFor="let item of (tasksService.initiatedItems$ | async); let i = index"
           [isInitiated]="true"
           [data]="item"
+          (click)="openNfc(i)"
         ></app-tabs-tasks-card>
       </div>
     </ng-container>

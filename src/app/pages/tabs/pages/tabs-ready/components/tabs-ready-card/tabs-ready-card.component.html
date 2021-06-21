@@ -1,10 +1,10 @@
 <div class="item">
   <div class="chart">
-    {{data.date}}
+    {{data.endTime | date:'hh:mm'}}
   </div>
   <div class="description">
     <div class="description__title">
-      <span class="number">{{data.num}}</span>
+      <span class="number">№ {{data?.id}}</span>
       <svg-icon
         src="assets/Icons/tabs/ready-tab/edit.svg"
         [svgStyle]="{
@@ -15,13 +15,13 @@
       ></svg-icon>
     </div>
     <div class="description__item">
-      Установка: &nbsp;<span class="value">{{data.manufacture}}</span>
+      Установка: &nbsp;<span class="value">{{data?.plantName}}</span>
     </div>
     <div class="description__item">
-      Тип верификации: &nbsp;<span class="value">{{data.verificationType}}</span>
+      Тип верификации: &nbsp;<span class="value">{{data.typeVerification}}</span>
     </div>
     <div class="description__item">
-      Результат: &nbsp;<span class="value">{{data.result}}</span>
+      Результат: &nbsp;<span class="value">{{data.isApproved}}</span>
     </div>
   </div>
 </div>

@@ -1,6 +1,4 @@
-import {ITasksItem} from './tabs-tasks.page';
-
-export const TASKS_AGREE: ITasksItem[] = [
+export const TASKS_AGREE: any[] = [
     {
         num: '№115621',
         manufacture: 'АТ-9',
@@ -31,7 +29,7 @@ export const TASKS_AGREE: ITasksItem[] = [
     }
 ];
 
-export const INITIATED_TASKS: ITasksItem[] = [
+export const INITIATED_TASKS: any[] = [
     {
         num: '№115625',
         manufacture: 'ГФУ-2',

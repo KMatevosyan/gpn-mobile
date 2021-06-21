@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {ITasksItem} from '../tabs/pages/tabs-tasks/tabs-tasks.page';
 import {ModalController, NavController} from '@ionic/angular';
 import {TabsInfoService} from '../../services/tabs/tabs-info.service';
 import {ScannerModalComponent} from './components/scanner-modal/scanner-modal.component';
+import {IVerififcation, TasksService} from '../../services/tasks.service';
 
 @Component({
   selector: 'app-barcode-scanner',
@@ -11,20 +11,14 @@ import {ScannerModalComponent} from './components/scanner-modal/scanner-modal.co
   styleUrls: ['./barcode-scanner.component.scss'],
 })
 export class BarcodeScannerComponent implements OnInit {
-
-    public currentTask$: BehaviorSubject<ITasksItem> = new BehaviorSubject<ITasksItem>(null);
-
     constructor(
         private navCtrl: NavController,
         private modalCtrl: ModalController,
-        private tabsService: TabsInfoService
+        public tasksService: TasksService
     ) {
     }
 
     public ngOnInit(): void {
-        this.tabsService.agreeItems$.subscribe(val => {
-            this.currentTask$.next(val[0]);
-        });
     }
 
     public async openModal(): Promise<void> {
@@ -33,10 +27,15 @@ export class BarcodeScannerComponent implements OnInit {
     }
 
     public async enableBarcode(): Promise<void> {
-        await this.openModal();
+        this.navCtrl.navigateRoot('/timer').then();
+        //await this.openModal();
     }
 
     public back(): void {
         this.navCtrl.back();
+    }
+
+    public cancel(): void {
+        this.navCtrl.navigateRoot('/cancel').then();
     }
 }

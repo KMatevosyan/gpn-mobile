@@ -9,6 +9,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {CoreModule} from './@core/core.module';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {IonicStorageModule} from '@ionic/storage-angular';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,7 +20,8 @@ import {IonicStorageModule} from '@ionic/storage-angular';
         AngularSvgIconModule.forRoot(),
         AppRoutingModule, CoreModule,
         HammerModule,
-        IonicStorageModule.forRoot()
+        IonicStorageModule.forRoot(),
+        BrowserAnimationsModule
     ],
     providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
     bootstrap: [AppComponent],

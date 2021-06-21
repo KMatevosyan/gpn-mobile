@@ -1,13 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {BehaviorSubject} from 'rxjs';
-import {VerificationTypeComponent} from "../../components/verification-type/verification-type.component";
-import {TabsInfoService} from "../../../../services/tabs/tabs-info.service";
+import {VerificationTypeComponent} from '../../components/verification-type/verification-type.component';
+import {TabsInfoService} from '../../../../services/tabs/tabs-info.service';
+import {CreateVerificationService, IDropdownItem} from '../../../../services/create-verification.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
+export interface ICurrentValues {
+    manufacture: IDropdownItem;
+    machine: IDropdownItem;
+    pak: IDropdownItem;
+    quality: IDropdownItem[];
+}
 
 @Component({
   selector: 'app-new-verification',
   templateUrl: './new-verification.component.html',
   styleUrls: ['./new-verification.component.scss'],
+    animations: [
+        trigger('rows', [
+            state('collapsed', style({ opacity: 1, height: '0' })),
+            state('expanded', style({ opacity: 1, height: 'auto', 'max-height': '29vh'})),
+            transition('collapsed => expanded', animate('200ms ease-in')),
+            transition('expanded => collapsed', animate('200ms ease-out')),
+        ]),
+    ],
 })
 export class NewVerificationComponent implements OnInit {
     readonly selects: string[] = ['manufacture', 'machine', 'pak', 'quality'];
@@ -22,83 +39,50 @@ export class NewVerificationComponent implements OnInit {
         pak: false
     };
 
-    public dropdownActive: {
-        manufacture: boolean;
-        machine: boolean;
-        pak: boolean;
-        quality: boolean;
-    } = {
-        manufacture: true,
-        machine: false,
-        pak: false,
-        quality: false
-    };
-
-    public currentValues: {
-        manufacture: string;
-        machine: string;
-        pak: string;
-    } = {
+    public currentValues: ICurrentValues = {
         manufacture: null,
         machine: null,
-        pak: null
+        pak: null,
+        quality: []
     };
-
-    public manufactureList$: BehaviorSubject<string[]> = new BehaviorSubject([
-        'Производство 1',
-        'Производство 2',
-        'Производство 3',
-        'Производство 4'
-    ]);
-
-    public machineList$: BehaviorSubject<string[]> = new BehaviorSubject([
-        'ТЭУ-1',
-        'ФСБ',
-        'ЭЛОУ-АВТ-9',
-        'АТ-9'
-    ]);
-
-    public pakList$: BehaviorSubject<string[]> = new BehaviorSubject([
-        'ПАК 1',
-        'ПАК 2',
-        'ПАК 3',
-        'ПАК 4'
-    ]);
-
-    public qualityList$: BehaviorSubject<string[]> = new BehaviorSubject([
-        'Температура',
-        'Примеси',
-        'Плотность',
-        'Вязкозть'
-    ]);
 
     constructor(
         public modalController: ModalController,
         private tabsService: TabsInfoService,
+        public dropdownService: CreateVerificationService
     ) { }
 
     public toggleDropdown(type: string): void {
         this.dropdownExpand[type] = !this.dropdownExpand[type];
     }
 
-    public chooseItem(idx: number, type: string): void {
-        let list;
+    public async chooseItem(idx: number, type: string): Promise<void> {
+        let list: IDropdownItem[];
         switch (type) {
             case 'manufacture':
-                list = this.manufactureList$.getValue();
+                list = this.dropdownService.manufactureList$.getValue();
+                if (!(this.currentValues[type]?.id === list[idx]?.id)) {
+                    this.currentValues.machine = null;
+                    this.currentValues.pak = null;
+                    await this.dropdownService.getMachines(list[idx]?.id);
+                }
                 break;
             case 'machine':
-                list = this.machineList$.getValue();
+                list = this.dropdownService.machineList$.getValue();
+                if (!(this.currentValues[type]?.id === list[idx]?.id)) {
+                    this.currentValues.pak = null;
+                    await this.dropdownService.getPaks(list[idx]?.id);
+                }
                 break;
             case 'pak':
-                list = this.pakList$.getValue();
+                list = this.dropdownService.pakList$.getValue();
+                if (!(this.currentValues[type]?.id === list[idx]?.id)) {
+                    await this.dropdownService.getQuality(list[idx]?.id);
+                }
                 break;
         }
 
         this.currentValues[type] = list[idx];
-
-        const index = this.selects.findIndex(item => item === type);
-        this.dropdownActive[this.selects[index + 1]] = true;
     }
 
     public dismiss(): void {
@@ -106,10 +90,22 @@ export class NewVerificationComponent implements OnInit {
     }
 
     public openVerificationType(): void {
+        this.currentValues.quality = this.dropdownService.qualityList$.getValue().filter(x => x.chosen);
+
+        this.dropdownService.currentValue = {
+            manufacture: this.currentValues.manufacture.name,
+            machine: this.currentValues.machine.name,
+            pak: this.currentValues.pak.position_name,
+            quality: this.currentValues.quality.map(x => ({
+                name: x.name
+            }))
+        };
+
         this.presentModal().then();
     }
 
     ngOnInit() {
+        this.dropdownService.getProductions().then();
         this.tabsService.closeVerification$.subscribe(value =>  {
             if(value) {
                 this.modalController.dismiss().then();

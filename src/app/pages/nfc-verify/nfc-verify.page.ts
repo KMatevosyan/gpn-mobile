@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavController} from '@ionic/angular';
-import {ITasksItem} from '../tabs/pages/tabs-tasks/tabs-tasks.page';
 import {BehaviorSubject} from 'rxjs';
 import {TabsInfoService} from '../../services/tabs/tabs-info.service';
 import {NfcTimerModalComponent} from './components/nfc-timer-modal/nfc-timer-modal.component';
+import {IVerififcation, TasksService} from '../../services/tasks.service';
 
 @Component({
     selector: 'app-nfc-verify.page',
@@ -11,20 +11,15 @@ import {NfcTimerModalComponent} from './components/nfc-timer-modal/nfc-timer-mod
     styleUrls: ['./nfc-verify.page.scss']
 })
 export class NfcVerifyPage implements OnInit {
-
-    public currentTask$: BehaviorSubject<ITasksItem> = new BehaviorSubject<ITasksItem>(null);
-
     constructor(
         private navCtrl: NavController,
         private modalCtrl: ModalController,
-        private tabsService: TabsInfoService
+        private tabsService: TabsInfoService,
+        public tasksService: TasksService
     ) {
     }
 
     public ngOnInit(): void {
-        this.tabsService.agreeItems$.subscribe(val => {
-            this.currentTask$.next(val[0]);
-        });
     }
 
     public async openModal(): Promise<void> {
@@ -33,10 +28,18 @@ export class NfcVerifyPage implements OnInit {
     }
 
     public async enableNfc(): Promise<void> {
+        const nfcDate: Date = new Date();
+        const task = this.tasksService.currentTask$.value;
+        task.nfcTime = nfcDate;
+        this.tasksService.currentTask$.next(task);
         await this.openModal();
     }
 
     public back(): void {
         this.navCtrl.back();
+    }
+
+    public cancel(): void {
+        this.navCtrl.navigateRoot('/cancel').then();
     }
 }

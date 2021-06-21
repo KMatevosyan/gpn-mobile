@@ -19,6 +19,18 @@ const routes: Routes = [
         loadChildren: () => import('./pages/barcode-scanner/barcode-scanner.module').then(m => m.MyBarcodeScannerModule)
     },
     {
+        path: 'timer',
+        loadChildren: () => import('./pages/timer/timer.module').then(m => m.TimerModule)
+    },
+    {
+        path: 'result',
+        loadChildren: () => import('./pages/result/result.module').then(m => m.ResultModule)
+    },
+    {
+        path: 'cancel',
+        loadChildren: () => import('./pages/cancel/cancel.module').then(m => m.CancelModule)
+    },
+    {
         path: 'tabs',
         loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
     },

@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IPageTab, PageTabType} from '../../tabs.page';
-import {BehaviorSubject} from 'rxjs';
-import {READY} from './mock';
 import {ModalController, NavController} from '@ionic/angular';
 import {TabsReadyModalComponent} from './components/tabs-ready-modal/tabs-ready-modal.component';
-
+import {TasksService} from '../../../../services/tasks.service';
 
 export interface IReadyItem {
     num: string;
@@ -32,11 +30,10 @@ export interface IReadyItemProperty {
 export class TabsReadyPage implements OnInit, IPageTab {
     public route: PageTabType = 'ready';
 
-    public readyItems$: BehaviorSubject<IReadyItem[]> = new BehaviorSubject<IReadyItem[]>(READY);
-
     constructor(
         private navCtrl: NavController,
         private modalController: ModalController,
+        public taskService: TasksService,
     ) {
     }
 

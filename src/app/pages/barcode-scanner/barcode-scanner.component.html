@@ -9,7 +9,7 @@
         }"
       ></svg-icon>
     </div>
-    <div class="title">{{(currentTask$ | async)?.num}}</div>
+    <div class="title">№ {{(tasksService.currentTask$ | async)?.id}}</div>
   </app-header>
 
   <div class="content">
@@ -19,10 +19,10 @@
       <div class="canister-container">
         <div class="info">
           <div class="content-text-block">
-            <span class="gray-text">Установка: <span class="light-text">{{(currentTask$ | async)?.manufacture}}</span></span>
+            <span class="gray-text">Установка: <span class="light-text">{{(tasksService.currentTask$ | async)?.plantName}}</span></span>
           </div>
           <div class="content-text-block">
-            <span class="gray-text">Тип верификации: <span class="light-text">{{(currentTask$ | async)?.verificationType}}</span></span>
+            <span class="gray-text">Тип верификации: <span class="light-text">{{(tasksService.currentTask$ | async)?.typeVerification}}</span></span>
           </div>
         </div>
         <svg-icon
@@ -53,7 +53,7 @@
     </div>
 
     <button class="btn btn_activateBarcode" (click)="enableBarcode()">Сканировать</button>
-    <button class="btn" disabled>Завершить задание</button>
+    <button class="btn" (click)="cancel()">Отменить задание</button>
   </div>
 </div>
 

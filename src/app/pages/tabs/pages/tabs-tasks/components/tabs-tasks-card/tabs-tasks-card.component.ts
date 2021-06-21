@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ITasksItem} from '../../tabs-tasks.page';
 import {BehaviorSubject} from 'rxjs';
+import {IVerififcation} from '../../../../../../services/tasks.service';
 
 @Component({
   selector: 'app-tabs-tasks-card',
@@ -8,7 +8,7 @@ import {BehaviorSubject} from 'rxjs';
   styleUrls: ['./tabs-tasks-card.component.scss'],
 })
 export class TabsTasksCardComponent implements OnInit {
-    @Input() data: ITasksItem;
+    @Input() data: IVerififcation;
     @Input() isActive: boolean;
     @Input() isInitiated: boolean;
 

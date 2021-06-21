@@ -18,8 +18,7 @@
 
   <div class="content">
     <div
-      class="select-container"
-      [class.select-container_active]="dropdownActive?.manufacture"
+      class="select-container select-container_active"
     >
       <div class="select-title">Производство</div>
       <div
@@ -31,7 +30,7 @@
         (click)="toggleDropdown('manufacture')"
       >
         <div class="current">
-          {{currentValues?.manufacture || 'Выберите производство'}}
+          {{currentValues?.manufacture?.name || 'Выберите производство'}}
           <svg-icon
             src="/assets/Icons/tabs/arrowDown.svg"
             [svgStyle]="{
@@ -40,19 +39,22 @@
             }"
           ></svg-icon>
         </div>
-        <div class="dropdown-list">
+        <div
+          class="dropdown-list"
+          [@rows]="dropdownExpand.manufacture ? 'expanded' : 'collapsed'"
+        >
           <div
             class="dropdown__item"
-            *ngFor="let manufacture of (manufactureList$ | async); let i = index"
+            *ngFor="let manufacture of (dropdownService.manufactureList$ | async); let i = index"
             (click)="chooseItem(i, 'manufacture')"
-          >{{manufacture}}</div>
+          >{{manufacture?.name}}</div>
         </div>
       </div>
     </div>
 
     <div
       class="select-container"
-      [class.select-container_active]="dropdownActive?.machine"
+      [class.select-container_active]="currentValues?.manufacture"
     >
       <div class="select-title">Установка</div>
       <div
@@ -64,7 +66,7 @@
         (click)="toggleDropdown('machine')"
       >
         <div class="current">
-          {{currentValues?.machine || 'Выберите установку'}}
+          {{currentValues?.machine?.name || 'Выберите установку'}}
           <svg-icon
             src="/assets/Icons/tabs/arrowDown.svg"
             [svgStyle]="{
@@ -73,19 +75,22 @@
             }"
           ></svg-icon>
         </div>
-        <div class="dropdown-list">
+        <div
+          class="dropdown-list"
+          [@rows]="dropdownExpand.machine ? 'expanded' : 'collapsed'"
+        >
           <div
             class="dropdown__item"
-            *ngFor="let machine of (machineList$ | async); let i = index"
+            *ngFor="let machine of (dropdownService.machineList$ | async); let i = index"
             (click)="chooseItem(i, 'machine')"
-          >{{machine}}</div>
+          >{{machine?.name}}</div>
         </div>
       </div>
     </div>
 
     <div
       class="select-container"
-      [class.select-container_active]="dropdownActive?.pak"
+      [class.select-container_active]="currentValues?.machine"
     >
       <div class="select-title">ПАК</div>
       <div
@@ -97,7 +102,7 @@
         (click)="toggleDropdown('pak')"
       >
         <div class="current">
-          {{currentValues?.pak || 'Выберите ПАК'}}
+          {{currentValues?.pak?.product_name || 'Выберите ПАК'}}
           <svg-icon
             src="/assets/Icons/tabs/arrowDown.svg"
             [svgStyle]="{
@@ -106,19 +111,22 @@
             }"
           ></svg-icon>
         </div>
-        <div class="dropdown-list">
+        <div
+          class="dropdown-list"
+          [@rows]="dropdownExpand.pak ? 'expanded' : 'collapsed'"
+        >
           <div
             class="dropdown__item"
-            *ngFor="let pak of (pakList$ | async); let i = index"
+            *ngFor="let pak of (dropdownService.pakList$ | async); let i = index"
             (click)="chooseItem(i, 'pak')"
-          >{{pak}}</div>
+          >{{pak?.product_name}}</div>
         </div>
       </div>
     </div>
 
     <div
       class="select-container"
-      [class.select-container_active]="dropdownActive?.quality"
+      [class.select-container_active]="currentValues.pak"
     >
       <div class="select-title">Показатель качества</div>
 
@@ -128,11 +136,11 @@
           'z-index': 9000
         }"
       >
-        <div class="checkbox-item" *ngFor="let quality of (qualityList$ | async)">
+        <div class="checkbox-item" *ngFor="let quality of (dropdownService.qualityList$ | async)">
           <div class="checkbox">
-            <ion-checkbox color="primary"></ion-checkbox>
+            <ion-checkbox color="primary" [(ngModel)]="quality.chosen"></ion-checkbox>
           </div>
-          <div class="checkbox-item__name">{{quality}}</div>
+          <div class="checkbox-item__name">{{quality.name}}</div>
         </div>
       </div>
     </div>
@@ -141,7 +149,7 @@
       <button
         (click)="openVerificationType()"
         class="btn btn-next"
-        [disabled]="!this.dropdownActive.quality"
+        [disabled]="!currentValues.pak"
       >Далее</button>
 
       <button

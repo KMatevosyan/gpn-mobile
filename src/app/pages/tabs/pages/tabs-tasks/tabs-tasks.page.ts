@@ -5,14 +5,6 @@ import {TabsInfoService} from '../../../../services/tabs/tabs-info.service';
 import {ModalController, NavController} from '@ionic/angular';
 import {TasksService} from '../../../../services/tasks.service';
 
-export interface ITasksItem {
-    num: string;
-    manufacture: string;
-    date: string;
-    verificationType: string;
-    fraction: string;
-}
-
 @Component({
     selector: 'app-tabs-tasks',
     templateUrl: './tabs-tasks.page.html',
@@ -23,16 +15,13 @@ export class TabsTasksPage implements OnInit, IPageTab {
 
     public tabs$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(['согласованные', 'инициированные']);
 
-    public agreeItems$: BehaviorSubject<ITasksItem[]> = new BehaviorSubject<ITasksItem[]>([]);
-    public initiatedItems$: BehaviorSubject<ITasksItem[]> = new BehaviorSubject<ITasksItem[]>([]);
-
     public currentTab$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
     constructor(
         public tabsService: TabsInfoService,
         public modalController: ModalController,
         private navCtrl: NavController,
-        private tasksService: TasksService,
+        public tasksService: TasksService,
     ) {}
 
 
@@ -40,19 +29,14 @@ export class TabsTasksPage implements OnInit, IPageTab {
         this.tabsService.tasksCurrentTab$.subscribe(value => {
             this.currentTab$.next(value);
         });
-        this.tabsService.agreeItems$.subscribe(val => {
-            this.agreeItems$.next(val);
-        });
-        this.tabsService.initiatedItems$.subscribe(val => {
-            this.initiatedItems$.next(val);
-        });
     }
 
     public changeTab(i): void {
         this.currentTab$.next(i);
     }
 
-    public openNfc(): void {
+    public openNfc(i: number): void {
+        this.tasksService.currentTask$.next(this.tasksService.initiatedItems$.value[i]);
         this.navCtrl.navigateRoot('/nfc').then();
     }
 }

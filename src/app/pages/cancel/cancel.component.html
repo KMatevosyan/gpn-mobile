@@ -1,0 +1,76 @@
+<div class="container">
+  <app-header>
+    <div class="arrow" (click)="back()">
+      <svg-icon
+        src="/assets/Icons/tabs/arrowLeft.svg"
+        [svgStyle]="{
+          'height.vh': 3.9,
+          'width.vh': 3.9
+        }"
+      ></svg-icon>
+    </div>
+    <div class="title">№ {{(tasksService.currentTask$ | async)?.id}}</div>
+  </app-header>
+
+  <div class="content">
+    <app-step-progress-bar [stepsCount]="4" [activeStepIndex]="2"></app-step-progress-bar>
+
+    <div class="task=info-block">
+      <div class="canister-container">
+        <div class="info">
+          <div class="content-text-block">
+            <span class="gray-text">Установка: <span class="light-text">{{(tasksService.currentTask$ | async)?.plantName}}</span></span>
+          </div>
+          <div class="content-text-block">
+            <span class="gray-text">Тип верификации: <span class="light-text">{{(tasksService.currentTask$ | async)?.typeVerification}}</span></span>
+          </div>
+        </div>
+        <svg-icon
+          class="canister"
+          src="assets/Icons/tabs/tasks-tab/canister.svg"
+          [svgStyle]="{
+            'width.vh': 6.2,
+            'height.vh': 6.2
+          }"
+        ></svg-icon>
+      </div>
+
+      <div class="content-text-block block-description">
+        <span class="gray-text">
+          Причина завершения задания:
+        </span>
+
+        <div
+          class="dropdown"
+          [class.dropdown_expanded]="dropdownExpand"
+          (click)="toggleDropdown()"
+        >
+          <div class="current">
+            {{currentValue?.name || 'Выберите причину'}}
+            <svg-icon
+              src="/assets/Icons/tabs/arrowDown.svg"
+              [svgStyle]="{
+              'height.vh': 3.9,
+              'width.vh': 3.9
+          }"
+            ></svg-icon>
+          </div>
+          <div class="dropdown-list">
+            <div
+              class="dropdown__item"
+              *ngFor="let type of (dropdownService.reasons$ | async); let i = index"
+              (click)="chooseItem(i)"
+            >{{type.name}}</div>
+          </div>
+        </div>
+
+        <textarea *ngIf="isOther" [(ngModel)]="currentValue.msg" class="text-area" placeholder="Напишите причину"></textarea>
+      </div>
+
+    </div>
+
+    <button class="btn btn_active" (click)="accept()">Завершить задание</button>
+    <button class="btn" (click)="back()">Отменить</button>
+  </div>
+</div>
+

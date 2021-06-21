@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IReadyItem} from '../../tabs-ready.page';
 import {ModalController} from '@ionic/angular';
 import {TabsReadyModalComponent} from '../tabs-ready-modal/tabs-ready-modal.component';
+import {IVerififcation} from '../../../../../../services/tasks.service';
 
 @Component({
   selector: 'app-tabs-ready-card',
@@ -9,13 +9,13 @@ import {TabsReadyModalComponent} from '../tabs-ready-modal/tabs-ready-modal.comp
   styleUrls: ['./tabs-ready-card.component.scss'],
 })
 export class TabsReadyCardComponent implements OnInit {
-    @Input() data: IReadyItem;
+    @Input() data: IVerififcation;
     @Input() idx: number;
     @Input() isActive: boolean;
     @Input() isInitiated: boolean;
 
     constructor(
-        private modalController: ModalController
+        private modalController: ModalController,
     ) { }
 
     public openAccept(): void {

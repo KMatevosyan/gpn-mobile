@@ -13,7 +13,7 @@
   </app-header>
 
   <div class="content">
-    <app-step-progress-bar [stepsCount]="4" [activeStepIndex]="0"></app-step-progress-bar>
+    <app-step-progress-bar [stepsCount]="4" [activeStepIndex]="3"></app-step-progress-bar>
 
     <div class="task=info-block">
       <div class="canister-container">
@@ -35,25 +35,26 @@
         ></svg-icon>
       </div>
 
-      <div class="content-text-block">
+      <div class="content-text-block pak-result">
         <span class="light-text">
-          Отсканируйте NFC метку для подтверждения отбора
+          Результат ПАК
         </span>
-      </div>
-
-      <div class="nfc-icon-block">
-        <svg-icon
-          src="assets/Icons/nfc/nfc_icon.svg"
-          [svgStyle]="{
-              'width': '34vh',
-              'height': '34vh'
-            }"
-        ></svg-icon>
+        <div class="quality-list">
+          <div
+            class="quality__item"
+            *ngFor="let item of quality"
+          >
+            <div class="name">{{item.name}}</div>
+            <div class="value">
+              <input type="number" [(ngModel)]="item.value" placeholder="Введите результат...">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <button class="btn btn_activateNFC" (click)="enableNfc()">Отсканировать метку</button>
-    <button class="btn" (click)="cancel()">Отменить задание</button>
+    <button class="btn btn_active" (click)="accept()">Завершить задание</button>
   </div>
 </div>
+
 

@@ -7,8 +7,8 @@
 >
   <div class="description">
     <div class="description__title">
-      <span class="number">{{data.num}}</span>
-      <span class="date">{{data.date}}</span>
+      <span class="number">№ {{data.id}}</span>
+      <span class="date">{{data.plantDatetime | date:'hh:mm dd.MM'}}</span>
       <svg-icon
         src="assets/Icons/tabs/tasks-tab/canister.svg"
         [svgStyle]="{
@@ -18,11 +18,11 @@
       ></svg-icon>
     </div>
     <div class="description__item">
-      Установка: <span class="value">{{data.manufacture}}</span>
+      Установка: <span class="value">{{data.plantName}}</span>
     </div>
     <div class="description__item">
-      Тип верификации: <span class="value">{{data.verificationType}}</span>
+      Тип верификации: <span class="value">{{data.typeVerification}}</span>
     </div>
-    <div class="description__fraction">{{data.fraction}}</div>
+    <div class="description__fraction">{{data.productName}}</div>
   </div>
 </div>
