@@ -12,7 +12,7 @@ import {take} from 'rxjs/operators';
 export class NfcTimerModalComponent implements OnInit {
 
     public isNfcAccepted = false;
-    public timerDuration = 2;
+    public timerDuration = 25;
     public currentTimerValue: number = this.timerDuration;
 
     private runTimeOut: number;
