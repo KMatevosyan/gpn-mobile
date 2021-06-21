@@ -27,7 +27,7 @@ export class LoginPage implements OnInit, OnDestroy {
         private navCtrl: NavController,
         private keyboardService: KeyboardService,
         private auth: AuthorizationService,
-        private tasks: TasksService
+        public tasks: TasksService
     ) {}
 
     ngOnInit(): void {

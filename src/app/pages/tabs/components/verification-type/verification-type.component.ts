@@ -24,7 +24,7 @@ export class VerificationTypeComponent implements OnInit {
         public modalController: ModalController,
         private navCtrl: NavController,
         private tabsService: TabsInfoService,
-        private tasksService: TasksService,
+        public tasksService: TasksService,
         public dropdownService: CreateVerificationService
     ) { }
 

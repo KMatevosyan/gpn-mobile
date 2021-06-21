@@ -17,7 +17,7 @@ export class CancelComponent implements OnInit {
     constructor(
         private navCtrl: NavController,
         private tabsService: TabsInfoService,
-        private tasksService: TasksService,
+        public tasksService: TasksService,
         public dropdownService: CreateVerificationService
     ) { }
 
