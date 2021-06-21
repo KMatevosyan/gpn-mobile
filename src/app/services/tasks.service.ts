@@ -16,6 +16,7 @@ export interface IVerififcation {
     task_finalized: boolean;
     nfcTime?: Date;
     endTime?: Date;
+    properties?: any[];
 }
 
 export interface IQuality {
