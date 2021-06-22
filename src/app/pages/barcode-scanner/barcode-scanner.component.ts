@@ -4,6 +4,7 @@ import {ModalController, NavController} from '@ionic/angular';
 import {TabsInfoService} from '../../services/tabs/tabs-info.service';
 import {ScannerModalComponent} from './components/scanner-modal/scanner-modal.component';
 import {IVerififcation, TasksService} from '../../services/tasks.service';
+import {BarcodeScanner} from "@ionic-native/barcode-scanner/ngx";
 
 @Component({
   selector: 'app-barcode-scanner',
@@ -14,7 +15,8 @@ export class BarcodeScannerComponent implements OnInit {
     constructor(
         private navCtrl: NavController,
         private modalCtrl: ModalController,
-        public tasksService: TasksService
+        public tasksService: TasksService,
+        private barcodeScanner: BarcodeScanner,
     ) {
     }
 
@@ -27,7 +29,11 @@ export class BarcodeScannerComponent implements OnInit {
     }
 
     public async enableBarcode(): Promise<void> {
-        this.navCtrl.navigateRoot('/timer').then();
+        this.barcodeScanner.scan().then(barcodeData => {
+            this.navCtrl.navigateRoot('/timer').then();
+        }).catch(err => {
+            console.log('Error', err);
+        });
         //await this.openModal();
     }
 

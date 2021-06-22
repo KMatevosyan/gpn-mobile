@@ -14,6 +14,7 @@ export interface IVerififcation {
     position_name: string;
     tareID: number;
     task_finalized: boolean;
+    task_end_filling: boolean;
     nfcTime?: Date;
     endTime?: Date;
     properties?: any[];
@@ -42,9 +43,9 @@ export class TasksService {
             const res = await this.http
                 .get<IVerififcation[]>(`${this.baseUrl}/engineer/api/Verification/getVers?date=${date.toISOString()}`)
                 .toPromise();
-            this.agreeItems$.next(res.filter(item => item.isApproved && !item.task_finalized));
-            this.initiatedItems$.next(res.filter(item => !item.isApproved && !item.task_finalized));
-            this.readyItems$.next(res.filter(item => item.task_finalized));
+            this.agreeItems$.next(res.filter(item => item.isApproved && !item.task_end_filling));
+            this.initiatedItems$.next(res.filter(item => !item.isApproved && !item.task_end_filling));
+            this.readyItems$.next(res.filter(item => item.task_end_filling));
             return true;
         }
         catch (error) {
