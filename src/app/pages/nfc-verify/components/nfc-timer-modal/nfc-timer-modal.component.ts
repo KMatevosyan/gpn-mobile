@@ -43,6 +43,7 @@ export class NfcTimerModalComponent implements OnInit {
             this.successTimeOut = window.setTimeout(async () => {
                 this.stopTimeouts();
                 await this.modalCtrl.dismiss();
+                this.navCtrl.navigateRoot('/barcode').then();
             }, 3000);
         });
     }
