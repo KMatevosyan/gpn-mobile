@@ -5,7 +5,7 @@ import {ThemeServiceService} from './services/theme-service.service';
 import {DOCUMENT} from '@angular/common';
 import {UserInfoService} from './services/user-info.service';
 import {Subscription} from 'rxjs';
-import {NfcService} from "./@core/services/nfc.service";
+import {NfcService} from './@core/services/nfc.service';
 
 @Component({
     selector: 'app-root',

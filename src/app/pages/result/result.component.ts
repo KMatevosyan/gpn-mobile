@@ -11,24 +11,7 @@ import {IQuality, IVerififcation, TasksService} from '../../services/tasks.servi
 })
 export class ResultComponent implements OnInit {
     public currentTask$: BehaviorSubject<IVerififcation> = new BehaviorSubject<IVerififcation>(null);
-    public quality: IQuality[] = [
-        {
-            name: 'Температура',
-            value: null,
-            dx: 0
-        },
-        {
-            name: 'Примеси',
-            value: null,
-            dx: 0
-        },
-        {
-            name: 'Вязкость',
-            value: null,
-            dx: 0
-        }
-    ];
-
+    public quality: IQuality[] = [];
     constructor(
         private navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -46,7 +29,16 @@ export class ResultComponent implements OnInit {
         task.endTime = endTime;
         this.tasksService.currentTask$.next(task);
 
+        task.selected_quality.forEach(item => {
+            this.quality.push({
+                dx: item.dx ?? 0,
+                name: item.parameter_name,
+                value: item.value
+            });
+        });
+
         await this.tasksService.setVerification(this.quality);
+        this.quality = [];
 
         const planDate = new Date(task.plantDatetime);
         await this.tasksService.getTasks(planDate);

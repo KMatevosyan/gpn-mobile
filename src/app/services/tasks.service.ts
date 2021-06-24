@@ -18,12 +18,16 @@ export interface IVerififcation {
     nfcTime?: Date;
     endTime?: Date;
     properties?: any[];
+    selected_quality: IQuality[];
 }
 
 export interface IQuality {
     name: string;
     dx: number;
     value: number;
+    parameter_name?: string;
+    quality_id?: number;
+    task_id?: number;
 }
 
 @Injectable({
@@ -53,7 +57,7 @@ export class TasksService {
         }
     }
 
-    public async setVerification(body: any[]): Promise<boolean> {
+    public async setVerification(body: IQuality[]): Promise<boolean> {
         const task = this.currentTask$.value;
         try {
             const res = await this.http
@@ -66,7 +70,20 @@ export class TasksService {
         }
     }
 
-    public async cancelVerification(id:number, msg: string, date: Date): Promise<boolean> {
+    public async setError(body: IQuality[]): Promise<boolean> {
+        const task = this.currentTask$.value;
+        try {
+            const res = await this.http
+                .post<any>(`${this.baseUrl}/engineer/api/Verification/set_error_pak?id_verification=${task.id}`, body)
+                .toPromise();
+            return true;
+        }
+        catch (error) {
+            return false;
+        }
+    }
+
+    public async cancelVerification(id: number, msg: string, date: Date): Promise<boolean> {
         const task = this.currentTask$.value;
         try {
             const res = await this.http

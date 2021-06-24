@@ -42,9 +42,9 @@
         <div class="quality-list">
           <div
             class="quality__item"
-            *ngFor="let item of quality"
+            *ngFor="let item of (tasksService.currentTask$ | async)?.selected_quality"
           >
-            <div class="name">{{item.name}}</div>
+            <div class="name">{{item.parameter_name}}</div>
             <div class="value">
               <input type="number" [(ngModel)]="item.value" placeholder="Введите результат...">
             </div>

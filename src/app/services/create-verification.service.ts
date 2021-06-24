@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {IQuality} from './tasks.service';
 
 export interface IDropdownItem {
     id: number;

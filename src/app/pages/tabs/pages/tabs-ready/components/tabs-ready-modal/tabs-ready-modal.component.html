@@ -16,26 +16,25 @@
       </div>
     </div>
 
-    <div class="date" *ngFor="let prop of data?.properties">
+    <div class="date" *ngFor="let prop of data?.selected_quality">
       <div class="property property__main">
-        <div class="title">{{prop.name}}</div>
+        <div class="title">{{prop.parameter_name}}</div>
         <div class="input-content">
-          <input [value]="prop?.value" class="value">
+          <input [(ngModel)]="prop.value" type="number" class="value">
         </div>
       </div>
       <div class="property property__error">
         <div class="title">Погрешность</div>
         <div class="input-content">
-          <input [value]="prop?.error || ''" class="value">
+          <input [(ngModel)]="prop.dx" type="number" class="value">
         </div>
       </div>
     </div>
 
     <div class="btn-container">
       <button
-        (click)="dismiss()"
+        (click)="accept()"
         class="btn btn-next"
-        [disabled]="false"
       >Сформировать задание</button>
     </div>
   </div>
