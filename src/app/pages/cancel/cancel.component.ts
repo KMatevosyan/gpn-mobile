@@ -29,7 +29,7 @@ export class CancelComponent implements OnInit {
         if (idx === 0) {
             this.isOther = true;
         }
-        else  {
+        else if (this.currentValue) {
             this.currentValue.msg = '';
         }
         const list = this.dropdownService.reasons$.getValue();

@@ -5,6 +5,7 @@ import {TabsInfoService} from '../../../../services/tabs/tabs-info.service';
 import {CreateVerificationService, IDropdownItem} from '../../../../services/create-verification.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TasksService} from "../../../../services/tasks.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-verification-type',
@@ -16,8 +17,8 @@ export class VerificationTypeComponent implements OnInit {
     public currentValue: IDropdownItem;
 
     public dateForm: FormGroup = new FormGroup({
-        day: new FormControl('23.06.2021', Validators.required),
-        time: new FormControl('12:35:00', Validators.required),
+        day: new FormControl(null, Validators.required),
+        time: new FormControl(null, Validators.required),
     });
 
     constructor(
@@ -25,7 +26,8 @@ export class VerificationTypeComponent implements OnInit {
         private navCtrl: NavController,
         private tabsService: TabsInfoService,
         public tasksService: TasksService,
-        public dropdownService: CreateVerificationService
+        public dropdownService: CreateVerificationService,
+        private datePipe: DatePipe
     ) { }
 
     public toggleDropdown(): void {
@@ -64,6 +66,14 @@ export class VerificationTypeComponent implements OnInit {
 
     ngOnInit() {
         this.dropdownService.getVerificationType().then();
+
+        const today = new Date();
+        today.setHours(today.getHours() + 1);
+
+        this.dateForm.setValue({
+            day: this.datePipe.transform(today, 'dd.MM.yyyy'),
+            time: this.datePipe.transform(today, 'hh:mm:ss')
+        });
     }
 
 }

@@ -6,7 +6,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {SimpleModalComponent} from '../../@shared/simple-modal/simple-modal.component';
 import {AuthorizationService} from '../../services/autoriztion.service';
-import {TasksService} from "../../services/tasks.service";
+import {TasksService} from '../../services/tasks.service';
 
 
 @Component({
@@ -46,7 +46,10 @@ export class LoginPage implements OnInit, OnDestroy {
             const res = await this.auth.getToken(this.loginForm.value);
             if (res) {
                 const date = new Date();
-                await this.tasks.getTasks(date);
+                this.tasks.getTasks(date).then();
+                await setInterval(()=> {
+                    this.tasks.getTasks(date);
+                }, 3000);
                 this.navCtrl.navigateRoot('/tabs').then();
             }
             else {

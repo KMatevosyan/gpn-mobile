@@ -17,7 +17,7 @@
         <span class="chart__title">Количество заданий,</span>
         <span class="chart__unit">шт</span>
         <span class="chart__total">{{(diagramData$ | async).total}}</span>
-        <div class="chart__date">{{(diagramData$ | async).date}}</div>
+        <div class="chart__date">{{(diagramData$ | async).date | date:'dd.MM.YYYY'}}</div>
       </div>
     </div>
   </div>

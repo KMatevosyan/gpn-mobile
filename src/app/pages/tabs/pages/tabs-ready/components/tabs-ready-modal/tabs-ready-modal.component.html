@@ -4,6 +4,7 @@
     <div class="description">
       <div class="description__title">
         <span class="number">№ {{data?.id}}</span>
+        <span class="number date">{{data.end_filling_timestamp | date:'hh:mm'}}</span>
       </div>
       <div class="description__item">
         Установка: <span class="value">{{data?.plantName}}</span>
@@ -35,7 +36,7 @@
       <button
         (click)="accept()"
         class="btn btn-next"
-      >Сформировать задание</button>
+      >Выполнено</button>
     </div>
   </div>
 </div>

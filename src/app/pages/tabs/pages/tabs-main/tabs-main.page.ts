@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {IPageTab, PageTabType} from '../../tabs.page';
-import {BehaviorSubject} from 'rxjs';
-import {MAIN_PAGE_DATA} from './mock';
+import {BehaviorSubject, combineLatest} from 'rxjs';
 import * as d3 from 'd3';
 import {ModalController, NavController} from '@ionic/angular';
 import {TabsInfoService} from '../../../../services/tabs/tabs-info.service';
-import {NewVerificationComponent} from "../new-verification/new-verification.component";
+import {NewVerificationComponent} from '../new-verification/new-verification.component';
+import {TasksService} from '../../../../services/tasks.service';
 
 export interface IDiagram {
     total: number;
-    date: string;
+    date: Date;
     sections: IDiagramSections[];
 }
 export interface IDiagramSections {
@@ -26,14 +26,15 @@ export interface IDiagramSections {
 })
 
 export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
-    @ViewChild('chart') chart: ElementRef;
+    @ViewChild('chart', {static: true}) chart: ElementRef;
     public route: PageTabType = 'main';
     public svg: any;
-    readonly diagramData$: BehaviorSubject<IDiagram> = new BehaviorSubject<IDiagram>(MAIN_PAGE_DATA);
+    readonly diagramData$: BehaviorSubject<IDiagram> = new BehaviorSubject<IDiagram>(null);
 
     constructor(
         private navCtrl: NavController,
         private tabsService: TabsInfoService,
+        private tasksService: TasksService,
         private modalController: ModalController
     ) {}
 
@@ -43,14 +44,38 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
     }
 
     ngOnInit() {
-        this.tabsService.diagramData$.subscribe(val => {
-            this.diagramData$.next(val);
+        combineLatest(
+            this.tasksService.initiatedItems$,
+            this.tasksService.agreeItems$,
+            this.tasksService.readyItems$
+        ).subscribe(tasks => {
+            const initiated = tasks[0];
+            const agree = tasks[1];
+            const ready = tasks[2];
+
+            const data: IDiagram = {
+                total: initiated.length + tasks[1].length + tasks[2].length,
+                date: new Date(),
+                sections: [
+                    {
+                        name: 'Новые',
+                        value: tasks[0].length + tasks[1].length,
+                        showValue: `${tasks[1].length}/${tasks[0].length + tasks[1].length}`,
+                        color: 'var(--gray-slyder)'
+                    },
+                    {
+                        name: 'Выполнены',
+                        value: tasks[2].length,
+                        color: 'var(--border-blue-color)'
+                    }
+                ]
+            };
+            this.diagramData$.next(data);
+            this.drawSvg(this.diagramData$.value);
         });
     }
 
-    ngAfterViewInit() {
-        this.drawSvg(this.diagramData$.value);
-    }
+    ngAfterViewInit() {}
 
     public addVerification(): void {
         this.presentModal().then();
@@ -114,7 +139,7 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
 
         let startPos = 0;
         let endPos = 0;
-        data.sections.reverse().forEach((section, i) => {
+        [...data.sections].reverse().forEach((section, i) => {
             if (i > 0) {
                 startPos += data.sections[i-1]?.value / data.total;
             }

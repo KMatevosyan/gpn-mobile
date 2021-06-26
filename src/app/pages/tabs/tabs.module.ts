@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -22,6 +22,7 @@ import {VerificationTypeComponent} from './components/verification-type/verifica
         AngularSvgIconModule,
         ReactiveFormsModule,
     ],
-  declarations: [TabsPage, NewVerificationComponent, VerificationTypeComponent]
+    declarations: [TabsPage, NewVerificationComponent, VerificationTypeComponent],
+    providers: [DatePipe]
 })
 export class TabsPageModule {}

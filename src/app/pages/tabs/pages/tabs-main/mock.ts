@@ -2,7 +2,7 @@ import {IDiagram} from './tabs-main.page';
 
 export const MAIN_PAGE_DATA: IDiagram = {
     total: 14,
-    date: '19.01.2021',
+    date: new Date(),
     sections: [
         {
             name: 'Новые',

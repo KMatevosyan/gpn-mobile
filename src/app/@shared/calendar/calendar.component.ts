@@ -96,7 +96,7 @@ export class CalendarComponent implements OnInit {
             0
         ).getDate();
 
-        const firstDayIndex = this.date.getDay();
+        const firstDayIndex = this.date.getDay() - 1;
 
         const lastDayIndex = new Date(
             this.date.getFullYear(),
@@ -104,12 +104,9 @@ export class CalendarComponent implements OnInit {
             0
         ).getDay();
 
-        const nextDays = 6 - lastDayIndex;
-
-        let days = '';
+        const nextDays = 7 - lastDayIndex;
 
         for (let x = firstDayIndex; x > 0; x--) {
-            days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
             this.prevDates.push({
                 date: prevLastDay - x + 1,
                 isCritical: false,
@@ -123,8 +120,6 @@ export class CalendarComponent implements OnInit {
                 i === new Date().getDate() &&
                 this.date.getMonth() === new Date().getMonth()
             ) {
-                days += `<div class="today">${i}</div>`;
-
                 this.currentDates.push({
                     date: i,
                     isCritical: true,
@@ -133,8 +128,6 @@ export class CalendarComponent implements OnInit {
                 });
 
             } else {
-                days += `<div>${i}</div>`;
-
                 this.currentDates.push({
                     date: i,
                     isCritical: false,
@@ -145,8 +138,6 @@ export class CalendarComponent implements OnInit {
         }
 
         for (let j = 1; j <= nextDays; j++) {
-            days += `<div class="next-date">${j}</div>`;
-
             this.nextDates.push({
                 date: j,
                 isCritical: false,
