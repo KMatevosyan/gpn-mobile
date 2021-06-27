@@ -72,7 +72,7 @@ export class VerificationTypeComponent implements OnInit {
 
         this.dateForm.setValue({
             day: this.datePipe.transform(today, 'dd.MM.yyyy'),
-            time: this.datePipe.transform(today, 'hh:mm:ss')
+            time: this.datePipe.transform(today, 'HH:mm:ss')
         });
     }
 
