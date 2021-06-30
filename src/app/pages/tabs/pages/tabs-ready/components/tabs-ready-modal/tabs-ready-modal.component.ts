@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {TabsInfoService} from '../../../../../../services/tabs/tabs-info.service';
-import {IReadyItem} from '../../tabs-ready.page';
 import {IQuality, IVerififcation, TasksService} from '../../../../../../services/tasks.service';
 
 @Component({

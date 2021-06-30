@@ -141,7 +141,7 @@ export class TabsMainPage implements OnInit, IPageTab, AfterViewInit {
         let endPos = 0;
         [...data.sections].reverse().forEach((section, i) => {
             if (i > 0) {
-                startPos += data.sections[i-1]?.value / data.total;
+                startPos += endPos;
             }
             endPos = startPos + section.value / data.total;
             g.append('path').attr('d', arcBg(startPos, endPos))

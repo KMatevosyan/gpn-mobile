@@ -106,25 +106,42 @@ export class CalendarComponent implements OnInit {
 
         const nextDays = 7 - lastDayIndex;
 
+        const today: Date = new Date();
+
+        const compareDates = (date1: Date, date2: Date) => date1.getDate() === date2.getDate()
+                && date1.getMonth() === date2.getMonth()
+                && date1.getFullYear() === date2.getFullYear();
+
         for (let x = firstDayIndex; x > 0; x--) {
             this.prevDates.push({
                 date: prevLastDay - x + 1,
                 isCritical: false,
                 isActive: false,
-                haveIndicator: false
+                haveIndicator:
+                    compareDates(
+                        new Date(this.date.getFullYear(), this.date.getMonth() - 1, prevLastDay - x + 1),
+                        new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+                    )
+                    || compareDates(
+                        new Date(this.date.getFullYear(), this.date.getMonth() - 1, prevLastDay - x + 1),
+                        new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)
+                    )
             });
         }
 
         for (let i = 1; i <= lastDay; i++) {
             if (
-                i === new Date().getDate() &&
-                this.date.getMonth() === new Date().getMonth()
+                i === today.getDate() &&
+                this.date.getMonth() === today.getMonth()
             ) {
                 this.currentDates.push({
                     date: i,
                     isCritical: true,
                     isActive: false,
-                    haveIndicator: (Math.random() > 0.6) || i === 26
+                    haveIndicator: compareDates(
+                        new Date(this.date.getFullYear(), this.date.getMonth(), i),
+                        new Date(today.getFullYear(), today.getMonth(), today.getDate())
+                    )
                 });
 
             } else {
@@ -132,7 +149,15 @@ export class CalendarComponent implements OnInit {
                     date: i,
                     isCritical: false,
                     isActive: false,
-                    haveIndicator: (Math.random() > 0.6) || i === 26
+                    haveIndicator:
+                        compareDates(
+                            new Date(this.date.getFullYear(), this.date.getMonth(), i),
+                            new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+                        )
+                        || compareDates(
+                            new Date(this.date.getFullYear(), this.date.getMonth(), i),
+                            new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)
+                        )
                 });
             }
         }
@@ -142,7 +167,15 @@ export class CalendarComponent implements OnInit {
                 date: j,
                 isCritical: false,
                 isActive: false,
-                haveIndicator: (Math.random() > 0.6)
+                haveIndicator:
+                    compareDates(
+                        new Date(this.date.getFullYear(), this.date.getMonth() + 1, j),
+                        new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+                    )
+                    || compareDates(
+                        new Date(this.date.getFullYear(), this.date.getMonth() + 1, j),
+                        new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)
+                    )
             });
         }
     };

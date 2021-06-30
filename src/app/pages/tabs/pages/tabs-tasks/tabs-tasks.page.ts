@@ -36,7 +36,12 @@ export class TabsTasksPage implements OnInit, IPageTab {
     }
 
     public openNfc(i: number): void {
-        this.tasksService.currentTask$.next(this.tasksService.initiatedItems$.value[i]);
+        if (this.tasksService.agreeItems$.value.length) {
+            this.tasksService.currentTask$.next(this.tasksService.agreeItems$.value[i]);
+        }
+        else {
+            this.tasksService.currentTask$.next(this.tasksService.initiatedItems$.value[i]);
+        }
         this.navCtrl.navigateRoot('/nfc').then();
     }
 }

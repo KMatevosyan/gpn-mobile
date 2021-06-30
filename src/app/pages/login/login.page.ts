@@ -49,7 +49,7 @@ export class LoginPage implements OnInit, OnDestroy {
                 this.tasks.getTasks(date).then();
                 await setInterval(()=> {
                     this.tasks.getTasks(date);
-                }, 3000);
+                }, 4500);
                 this.navCtrl.navigateRoot('/tabs').then();
             }
             else {
